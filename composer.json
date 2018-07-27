@@ -13,14 +13,15 @@
     ],
     "autoload": {
         "psr-4": {
-            "App\\": "app/src"
+            "App\\": "app/src",
+            "Utils\\": "app/utils",
+            "Data\\": "app/data"
         }
     },
     "require": {
         "slim/slim": "^3.0@beta",
-        "slim/twig-view": "^1.1",
-        "slim/flash": "dev-master",
         "monolog/monolog": "^1.13",
-        "akrabat/rka-slim-zfsm-container": "^1.0"
+        "akrabat/rka-slim-zfsm-container": "^1.0",
+        "addiks/phpsql": "^0.3.2"
     }
 }

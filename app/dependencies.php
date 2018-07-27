@@ -4,27 +4,8 @@
 $container = $app->getContainer();
 
 // -----------------------------------------------------------------------------
-// Service providers
+// Services
 // -----------------------------------------------------------------------------
-
-// Twig
-$view = new \Slim\Views\Twig(
-    $app->settings['view']['template_path'],
-    $app->settings['view']['twig']
-);
-$view->addExtension(new Twig_Extension_Debug());
-$view->addExtension(new \Slim\Views\TwigExtension($app->router, $app->request->getUri()));
-$container['view'] = $view;
-
-// Flash messages
-$container['flash'] = function ($c) {
-    return new \Slim\Flash\Messages;
-};
-
-// -----------------------------------------------------------------------------
-// Service factories
-// -----------------------------------------------------------------------------
-
 // monolog
 $container['logger'] = function ($c) {
     $settings = $c['settings']['logger'];
@@ -33,6 +14,13 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new \Monolog\Handler\StreamHandler($settings['path'], \Monolog\Logger::DEBUG));
     return $logger;
 };
+//in memory database
+$container['database'] = function () {
+    $db = new Data\EmployeeDatabase();
+    $db->init();
+    return $db->getPdo();
+};
+
 
 // -----------------------------------------------------------------------------
 // Action factories - created via an AbstractFactory

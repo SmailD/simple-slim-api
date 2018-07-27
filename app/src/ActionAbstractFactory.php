@@ -20,10 +20,10 @@ class ActionAbstractFactory implements AbstractFactoryInterface
     {
         $className = $requestedName;
 
-        // This factory creates Actions that have precisely two constructor parameters: $view & $logger
-        $view = $locator->get('view');
         $logger = $locator->get('logger');
+        $database = $locator->get('database');
+        $router = $locator->get('router');
         
-        return new $className($view, $logger);
+        return new $className($logger, $database, $router);
     }
 }
